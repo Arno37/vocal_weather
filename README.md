@@ -1,4 +1,4 @@
-# 📡 Vocal Weather App
+# ☀️ Vocal Weather App
 
 ## 🌍 Description
 Ce projet consiste à développer une **application météo interactive avec commande vocale**. L'utilisateur peut demander la météo à voix haute, et l'application analyse la requête pour fournir les prévisions correspondantes.
