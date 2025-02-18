@@ -16,7 +16,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### 📌 Services Utilisés
 - **Reconnaissance vocale :** Azure Speech-to-Text
 - **Analyse du langage :** Azure LUIS (Language Understanding)
-- **Données météo :** API externe Météo Concept https://api.meteo-concept.com/
+- **Données météo :** API externe avec Météo Concept
 - **Stockage :** Azure SQL Database
 - **Hébergement backend :** Azure App Services / Azure Functions
 - **Frontend :** Streamlit ou React
