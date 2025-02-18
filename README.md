@@ -1,4 +1,4 @@
-# 📡 Voice-Enabled Weather App
+# 📡 Vocal Weather App
 
 ## 🌍 Description
 Ce projet consiste à développer une **application météo interactive avec commande vocale**. L'utilisateur peut demander la météo à voix haute, et l'application analyse la requête pour fournir les prévisions correspondantes.
@@ -16,10 +16,10 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### 📌 Services Utilisés
 - **Reconnaissance vocale :** Azure Speech-to-Text
 - **Analyse du langage :** Azure LUIS (Language Understanding)
-- **Données météo :** API externe (OpenWeather, WeatherAPI, etc.)
-- **Stockage :** Azure SQL Database / Azure Blob Storage / Azure Redis Cache
+- **Données météo :** API externe Météo Concept https://api.meteo-concept.com/
+- **Stockage :** Azure SQL Database
 - **Hébergement backend :** Azure App Services / Azure Functions
-- **Frontend :** Interface web en Flask avec Jinja ou autre framework Python
+- **Frontend :** Streamlit ou React
 
 ### 🔗 Flux de travail
 1. L'utilisateur **parle** (ex: "Quel temps fera-t-il à Lyon demain ?").
@@ -36,7 +36,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### 🖥 Prérequis
 - Python 3.x
 - Compte Azure
-- Clé API d'un fournisseur météo (ex : OpenWeather)
+- Clé API du site https://api.meteo-concept.com/
 
 ### 📦 Installation
 1. **Cloner le projet**
@@ -56,9 +56,9 @@ Ce projet consiste à développer une **application météo interactive avec com
    ```
 4. **Configurer les variables d'environnement** (créer un fichier `.env`)
    ```env
-   AZURE_SPEECH_KEY=your_azure_speech_key
-   AZURE_SPEECH_REGION=your_azure_speech_region
-   WEATHER_API_KEY=your_weather_api_key
+   SPEECH_KEY=your_azure_speech_key
+   SPEECH_REGION=your_azure_speech_region
+   API_KEY=your_weather_api_key
    AZURE_STORAGE_CONNECTION=your_azure_storage_connection
    ```
 5. **Lancer l'application**
@@ -79,7 +79,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 
 ### 🌦 API Météo (ex: OpenWeather)
 - Fournit les prévisions météo.
-- Docs : [OpenWeather API](https://openweathermap.org/api)
+- Docs : [Meteo Concept API](https://api.meteo-concept.com/)
 
 ---
 ## 🛠 Fonctionnalités et Améliorations Futures
