@@ -8,36 +8,29 @@ cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
 retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
 openmeteo = openmeteo_requests.Client(session=retry_session)
 
-# Fonction pour récupérer les coordonnées d'une ville
 def get_coordinates(city_name):
+    """Retourne les coordonnées GPS d'une ville."""
     geolocator = Nominatim(user_agent="geoapi")
     location = geolocator.geocode(city_name)
     
-    if location:
-        return location.latitude, location.longitude
-    else:
-        return None
+    return (location.latitude, location.longitude) if location else None
 
-# Demander à l'utilisateur une ville
-ville = input("Entrez une ville : ")
-coords = get_coordinates(ville)
+def get_weather(city):
+    """Retourne la météo d'une ville en fonction de ses coordonnées."""
+    coords = get_coordinates(city)
+    if not coords:
+        return f"⚠ Ville '{city}' non trouvée."
 
-if coords:
-    print(f"Coordonnées de {ville} : {coords[0]}, {coords[1]}")
+    params = {"latitude": coords[0], "longitude": coords[1], "hourly": "temperature_2m"}
+    
+    try:
+        responses = openmeteo.weather_api("https://api.open-meteo.com/v1/forecast", params=params)
+        temperature = responses[0]["hourly"]["temperature_2m"][0]
+        return f"🌤 La température actuelle à {city} est de {temperature}°C."
+    except Exception as e:
+        return f"❌ Erreur lors de la récupération des données météo : {str(e)}"
 
-    # Mise à jour des paramètres avec les coordonnées de la ville recherchée
-    params = {
-        "latitude": coords[0],
-        "longitude": coords[1],
-        "hourly": "temperature_2m"
-    }
-
-    # Appel à l'API Open-Meteo avec les coordonnées dynamiques
-    responses = openmeteo.weather_api("https://api.open-meteo.com/v1/forecast", params=params)
-
-    # Extraction des données météo
-    response = responses[0]
-    print(f"Météo de {ville} :")
-
-else:
-    print("⚠ Ville non trouvée.")
+# 🔍 TEST UNIQUEMENT SI LE SCRIPT EST EXÉCUTÉ DIRECTEMENT
+if __name__ == "__main__":
+    ville = input("Entrez une ville : ")
+    print(get_weather(ville))
