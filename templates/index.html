@@ -1,137 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ nom_app }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* style.css (vous pouvez ajouter des styles personnalisés ici) */
-        #microphoneButton {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            outline: none;
-        }
-
-        #microphoneButton.recording {
-            background-color: #f44336; /* Rouge */
-        }
-
-        #microphoneButton:hover {
-            opacity: 0.8;
-        }
-    </style>
+    
+    <!-- Google Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>{{ nom_app }}</h1>
-        <button id="microphoneButton"><i class="fas fa-microphone"></i></button>
-        <div id="result"></div>
 
-    <script>
-        let recognition = null;
-        let isRecording = false;
-        const microphoneButton = document.getElementById('microphoneButton');
-        const resultDiv = document.getElementById('result');
+    <h1>{{ nom_app }}</h1>
 
-        microphoneButton.addEventListener('click', function() {
-            if (!isRecording) {
-                // Vérifier si l'API Web Speech est prise en charge
-                if ('webkitSpeechRecognition' in window) {
-                    recognition = new webkitSpeechRecognition();
-                    recognition.continuous = false;
-                    recognition.lang = "fr-FR";
-                    recognition.interimResults = false;
-                    recognition.maxAlternatives = 1;
+    <button id="microphone-button" class="material-icon-button">
+      <span class="material-icons" id="microphone-icon">mic</span>
+      <span id="button-text" style="display: none;"></span>
+  </button>
+        
 
-                    recognition.onstart = function() {
-                        resultDiv.innerHTML = "<p>Écoute en cours...</p>";
-                        microphoneButton.classList.add("recording");
-                        //microphoneButton.textContent = "Écoute..."; // Supprimer le texte
-                        microphoneButton.innerHTML = '<i class="fas fa-microphone-slash"></i>'; //Changer l'icône
-                        isRecording = true;
-                    }
+    <div id="recognized-text"></div>
 
-                    recognition.onerror = function(event) {
-                        let errorMessage = "Erreur de reconnaissance vocale : ";
-                        switch (event.error) {
-                            case 'not-allowed':
-                                errorMessage += "L'accès au microphone n'est pas autorisé. Veuillez vérifier les paramètres de votre navigateur et de votre système d'exploitation.";
-                                break;
-                            case 'no-speech':
-                                errorMessage += "Aucune parole détectée.";
-                                break;
-                            case 'aborted':
-                                errorMessage += "La reconnaissance vocale a été annulée.";
-                                break;
-                            default:
-                                errorMessage += event.error;
-                        }
-                        resultDiv.innerHTML = "<p>" + errorMessage + "</p>";
-                        microphoneButton.classList.remove("recording");
-                        //microphoneButton.textContent = "Démarrer le micro"; //Retirer le texte
-                        microphoneButton.innerHTML = '<i class="fas fa-microphone"></i>'; //Restaurer l'icône
-                        isRecording = false;
-                    }
-
-                    recognition.onresult = function(event) {
-                        const spokenText = event.results[0][0].transcript;
-                        resultDiv.innerHTML = "<p>Texte reconnu: " + spokenText + "</p>";
-
-                        // Envoyer le texte au serveur
-                        fetch('/get_weather', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ spoken_text: spokenText })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.error) {
-                                resultDiv.innerHTML = "<p>Erreur: " + data.error + "</p>";
-                            } else {
-                                resultDiv.innerHTML = "<p>Ville: " + data.city + "</p><p>Météo: " + data.weather + "</p>";
-                            }
-                            microphoneButton.classList.remove("recording");
-                            //microphoneButton.textContent = "Démarrer le micro"; //Retirer le texte
-                            microphoneButton.innerHTML = '<i class="fas fa-microphone"></i>'; //Restaurer l'icône
-                            isRecording = false;
-                        })
-                        .catch(error => {
-                            resultDiv.innerHTML = "<p>Erreur lors de la requête.</p>";
-                            microphoneButton.classList.remove("recording");
-                            //microphoneButton.textContent = "Démarrer le micro"; //Retirer le texte
-                            microphoneButton.innerHTML = '<i class="fas fa-microphone"></i>'; //Restaurer l'icône
-                            isRecording = false;
-                        });
-                    }
-
-                    recognition.onend = function() {
-                        console.log("Reconnaissance vocale terminée.");
-                        microphoneButton.classList.remove("recording");
-                        //microphoneButton.textContent = "Démarrer le micro"; //Retirer le texte
-                        microphoneButton.innerHTML = '<i class="fas fa-microphone"></i>'; //Restaurer l'icône
-                        isRecording = false;
-                    }
-
-                    recognition.start();
-                } else {
-                    resultDiv.innerHTML = "<p>L'API Web Speech n'est pas prise en charge par ce navigateur.</p>";
-                }
-            }
-        });
-
-    </script>
+    <div id="weather-info">
+        <h2>Météo pour <span id="city-name"></span></h2>
+        <p>Condition: <span id="condition"></span></p>
+        <p>Température: <span id="temperature"></span></p>
+        <p>Prévisions: <span id="forecast"></span></p>
     </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
