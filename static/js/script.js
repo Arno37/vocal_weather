@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         recognition.onresult = function(event) {
             const transcript = event.results[0][0].transcript;
-            recognizedTextDiv.textContent = "Ville de: " + transcript;
+            recognizedTextDiv.textContent = "Voici ma demande: " + transcript;
             sendVoiceCommand(transcript);
         };
 
@@ -74,6 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('condition').textContent = weatherData.condition;
         document.getElementById('temperature').textContent = weatherData.temperature;
         document.getElementById('forecast').textContent = weatherData.forecast;
-        weatherInfoDiv.style.display = 'block';
+        weatherInfoDiv.style.display = 'flex';
     }
 });

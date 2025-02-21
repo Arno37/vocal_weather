@@ -1,33 +1,34 @@
-from flask import Flask, render_template, request, jsonify
-from speech_to_text import recognize_from_microphone
-from nlp import extract_city
-from meteo import get_weather
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
-app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True  # Permet d'actualiser les templates automatiquement
+app = FastAPI()
 
-@app.route("/")
-def index():
-    return render_template("index.html", nom_app="Météo App'")
+# Monter le répertoire 'static' pour servir les fichiers statiques
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.route("/weather", methods=["POST"])
-def process_audio():
-    spoken_text = request.form.get("voice_command", "")
+# Configurer Jinja2Templates avec le répertoire 'templates'
+templates = Jinja2Templates(directory="templates")
 
-    if not spoken_text:
-        return jsonify({"error": "Aucune reconnaissance vocale détectée."})
+# Route pour la page d'accueil
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "nom_app": "Météo App'"})
 
-    city = extract_city(spoken_text)
-    if not city:
-        return jsonify({"error": "Aucune ville détectée dans l'audio."})
+# Route pour traiter le formulaire
+@app.post("/weather", response_class=JSONResponse)
+async def get_weather(request: Request, voice_command: str = Form(...)):
+    print(f"Commande vocale reçue du front-end: {voice_command}")
 
-    weather_info = get_weather(city)
-    return jsonify({
-        "city": city,
-        "condition": weather_info.get("condition", "Inconnu"),
-        "temperature": weather_info.get("temperature", "N/A"),
-        "forecast": weather_info.get("forecast", "Non disponible")
-    })
+    # Simulation de la réponse
+    weather_data = {
+        "city": voice_command,
+        "condition": "Ensoleillé",
+        "temperature": "25°C",
+        "forecast": "Prévisions pour les prochains jours : ..."
+    }
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    print(f"Réponse météo simulée: {weather_data}")
+    return weather_data

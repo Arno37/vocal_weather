@@ -10,9 +10,13 @@ body {
 }
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
 }
+
 
 /* Bouton du micro */
 .material-icon-button {
@@ -74,3 +78,23 @@ h1 {
     text-align: center;
     display: none;
 }
+
+#recognized-text {
+    margin-top: 20px; /* Ajuste la valeur selon ton besoin */
+    font-size: 18px;
+    text-align: center;
+}
+
+#microphone-icon {
+    font-size: 48px; /* Taille de l'icône */
+    color: white;    /* Couleur */
+}
+
+.shadow-custom {
+    box-shadow: 0px 30px 50px rgba(255, 255, 255, 0.3); /* Ombre personnalisée */
+}
+
+.bg-custom {
+    background-color: #d4edda; /* Vert clair doux */
+}
+

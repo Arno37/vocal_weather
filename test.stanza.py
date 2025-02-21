@@ -9,25 +9,42 @@ nlp = stanza.Pipeline("fr", processors="tokenize,pos,ner")
 
 def clean_text(text):
     """Nettoie le texte transcrit pour éviter les erreurs NLP"""
-    text = text.lower().strip()  # Mise en minuscules et suppression des espaces inutiles
-    text = re.sub(r'\s+', ' ', text)  # Remplace plusieurs espaces par un seul
-    text = re.sub(r'[^a-zA-ZÀ-ÿ0-9\s]', '', text)  # Supprime caractères spéciaux sauf espaces
-    text = re.sub(r'\b(euh|bah|heu|mmm|ben|ouais|voilà)\b', '', text)  # Supprime les mots parasites
+    text = text.lower().strip()
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r'[^a-zA-ZÀ-ÿ0-9\s]', '', text)
+    text = re.sub(r'\b(euh|bah|heu|mmm|ben|ouais|voilà)\b', '', text)
+
+    print(f"📌 Texte après nettoyage : {text}")  # 🔥 Debug
     return text
+
+KNOWN_CITIES = {"paris", "lyon", "marseille", "toulouse", "bordeaux", "lille",
+                "nantes", "strasbourg", "rennes", "montpellier", "nice","bruxelles", "genève", "londres", "berlin", "new york"}
 
 def extract_city_and_horizon(text):
     """Extrait le nom de la ville et l'horizon temporel du texte"""
     cleaned_text = clean_text(text)
     doc = nlp(cleaned_text)
 
+    print("\n🔎 Analyse NLP avec Stanza :")  # 🔥 Debug
+    for ent in doc.entities:
+        print(f"👉 Entité : {ent.text} | Type : {ent.type}")
+
     city = None
     horizon = None
 
-    # 🔹 Extraction des lieux (villes)
-    for ent in doc.ents:
-        if ent.type == "LOC":  # Vérifie si l'entité est une localisation
-            city = ent.text
-            break  # On prend la première ville détectée
+    # 🔹 Extraction des lieux avec Stanza (LOC ou GPE)
+    for ent in doc.entities:
+        if ent.type in ["LOC", "GPE"]:  
+            city = ent.text.lower()  # On met en minuscule pour standardiser
+            break  
+
+    # 🔹 Si Stanza ne détecte pas de ville, on cherche dans notre liste manuelle
+    if city is None:
+        words = cleaned_text.split()
+        for word in words:
+            if word in KNOWN_CITIES:
+                city = word
+                break
 
     # 🔹 Extraction des horizons temporels avec regex
     horizon_patterns = [
@@ -45,7 +62,9 @@ def extract_city_and_horizon(text):
     return city, horizon
 
 # 🔍 Exemple de test (simulation du Speech-to-Text)
-transcribed_text = "euh météo Paris dans 3 jours"
+transcribed_text = "météo Lyon la semaine prochaine"
+print(f"\n🔍 Texte transcrit : {transcribed_text}")  # Debug
+
 city, horizon = extract_city_and_horizon(transcribed_text)
 
 if city:
