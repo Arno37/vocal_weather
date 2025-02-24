@@ -1,13 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centre verticalement le contenu */
-    align-items: center;     /* Centre horizontalement le contenu */
-    height: 100vh;           /* Occupe toute la hauteur de la fenêtre */
-    margin: 0;               /* Supprime les marges par défaut */
-    background-color: #f4f4f4;
-}
+        background-image: url('/static/images/');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+
+
 
 h1 {
     position: absolute;
@@ -83,6 +83,7 @@ h1 {
     margin-top: 20px; /* Ajuste la valeur selon ton besoin */
     font-size: 18px;
     text-align: center;
+    display: none;
 }
 
 #microphone-icon {
@@ -98,3 +99,6 @@ h1 {
     background-color: #d4edda; /* Vert clair doux */
 }
 
+.card-body {
+    padding: 0 !important;
+}

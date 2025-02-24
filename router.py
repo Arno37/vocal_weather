@@ -26,5 +26,3 @@ async def get_weather_route(request: Request, voice_command: str = Form(...)):
     except Exception as e:
         print(f"Erreur interne : {str(e)}")  # Ajoute un log d'erreur
         return JSONResponse(content={"error": str(e)}, status_code=500)
-
-
