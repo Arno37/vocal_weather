@@ -1,5 +1,5 @@
 body {
-        background-image: url('/static/images/');
+        background-image: url('../images/espace.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -15,6 +15,7 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
+    color: white;
 }
 
 
@@ -102,3 +103,8 @@ h1 {
 .card-body {
     padding: 0 !important;
 }
+
+element {
+    width: auto !important;
+}
+

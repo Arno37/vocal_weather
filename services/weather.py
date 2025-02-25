@@ -40,7 +40,10 @@ WEATHER_CODES = {
 }
 
 # Fonction principale pour récupérer la météo
-def get_weather(city: str):
+def get_weather(city: str, days: int = 7):
+    """
+    Récupère la météo pour une ville et un nombre de jours donné.
+    """
 
     # URL Open-Meteo avec latitude/longitude fixes pour tester (Paris)
     url = (
@@ -62,7 +65,6 @@ def get_weather(city: str):
                         "date": date,
                         "temperature_max": temp_max,
                         "condition": WEATHER_CODES.get(code, "Condition inconnue")  # Conversion des codes météo
-
                     }
                     for date, temp_max, code in zip(
                         data["daily"]["time"], 
@@ -70,14 +72,28 @@ def get_weather(city: str):
                         data["daily"]["weathercode"]
                     )
                 ]
-                return {"city": city, "forecasts": forecasts}
+
+                # 🔍 Si l'utilisateur demande "aujourd'hui", on filtre uniquement la date du jour
+                if days == 1:
+                    today = datetime.today().strftime("%Y-%m-%d")
+                    today_forecast = next((f for f in forecasts if f["date"] == today), None)
+
+                    if today_forecast:
+                        return {"city": city, "forecasts": [today_forecast]}
+                    else:
+                        print("❌ Aucune prévision pour aujourd'hui.")
+                        return {"city": city, "forecasts": []}
+
+                # ✅ Retourne les prévisions sur `days` jours
+                return {"city": city, "forecasts": forecasts[:days]}
             else:
                 print("❌ Aucune donnée météo trouvée dans la réponse.")
-                return None
+                return {"city": city, "forecasts": []}
+
         else:
             print(f"❌ Erreur HTTP : {response.status_code}")
-            return None
+            return {"city": city, "forecasts": []}
 
     except Exception as e:
         print(f"❌ Erreur : {str(e)}")
-        return None
+        return {"city": city, "forecasts": []}

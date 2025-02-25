@@ -25,26 +25,27 @@ def extract_city_and_horizon(text):
     cleaned_text = clean_text(text)
     doc = nlp(cleaned_text)
 
-    print("\n🔎 Analyse NLP avec Stanza :")  # 🔥 Debug
-    for ent in doc.entities:
-        print(f"👉 Entité : {ent.text} | Type : {ent.type}")
+    print(f"\n🔎 Texte analysé : {cleaned_text}")  # Debug
 
     city = None
     horizon = None
 
     # 🔹 Extraction des lieux avec Stanza (LOC ou GPE)
     for ent in doc.entities:
+        print(f"👉 Entité détectée : {ent.text} | Type : {ent.type}")  # Debug
         if ent.type in ["LOC", "GPE"]:  
-            city = ent.text.lower()  # On met en minuscule pour standardiser
+            city = ent.text.lower()
             break  
 
-    # 🔹 Si Stanza ne détecte pas de ville, on cherche dans notre liste manuelle
+    # 🔹 Si Stanza ne détecte pas de ville, vérifie dans la liste manuelle
     if city is None:
         words = cleaned_text.split()
         for word in words:
             if word in KNOWN_CITIES:
                 city = word
                 break
+
+    print(f"🏙 Ville détectée : {city}")  # Debug
 
     # 🔹 Extraction des horizons temporels avec regex
     horizon_patterns = [
@@ -56,23 +57,9 @@ def extract_city_and_horizon(text):
     for pattern in horizon_patterns:
         match = re.search(pattern, cleaned_text, re.IGNORECASE)
         if match:
-            horizon = match.group(0)  # Prend la première correspondance trouvée
+            horizon = match.group(0)  
             break
 
+    print(f"📅 Horizon détecté : {horizon}")  # Debug
+
     return city, horizon
-
-# 🔍 Exemple de test (simulation du Speech-to-Text)
-transcribed_text = "météo Lyon la semaine prochaine"
-print(f"\n🔍 Texte transcrit : {transcribed_text}")  # Debug
-
-city, horizon = extract_city_and_horizon(transcribed_text)
-
-if city:
-    print(f"🏙 Ville détectée : {city}")
-else:
-    print("⚠ Aucune ville détectée.")
-
-if horizon:
-    print(f"📅 Horizon détecté : {horizon}")
-else:
-    print("⚠ Aucun horizon temporel détecté.")
