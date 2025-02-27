@@ -15,45 +15,18 @@ def clean_text(text):
     text = re.sub(r'\b(euh|bah|heu|mmm|ben|ouais|voilà)\b', '', text)  # Supprime les mots parasites
     return text
 
-def extract_city_and_horizon(text):
-    """Extrait le nom de la ville et l'horizon temporel du texte"""
-    cleaned_text = clean_text(text)
-    doc = nlp(cleaned_text)
+def extract_city_and_horizon(voice_command):
+    print(f"🔍 Commande reçue : {voice_command}")
 
-    city = None
-    horizon = None
-
-    # 🔹 Extraction des lieux (villes)
-    for ent in doc.ents:
-        if ent.type == "LOC":  # Vérifie si l'entité est une localisation
-            city = ent.text
-            break  # On prend la première ville détectée
-
-    # 🔹 Extraction des horizons temporels avec regex
-    horizon_patterns = [
-        r"\b(dans\s+\d+\s+(jours|semaines|mois|ans))\b",
-        r"\b(la semaine prochaine|le mois prochain|l'année prochaine)\b",
-        r"\b(demain|après-demain|aujourd'hui)\b"
-    ]
-
-    for pattern in horizon_patterns:
-        match = re.search(pattern, cleaned_text, re.IGNORECASE)
-        if match:
-            horizon = match.group(0)  # Prend la première correspondance trouvée
-            break
-
-    return city, horizon
-
-# 🔍 Exemple de test (simulation du Speech-to-Text)
-transcribed_text = "euh météo Paris dans 3 jours"
-city, horizon = extract_city_and_horizon(transcribed_text)
-
-if city:
-    print(f"🏙 Ville détectée : {city}")
-else:
-    print("⚠ Aucune ville détectée.")
-
-if horizon:
-    print(f"📅 Horizon détecté : {horizon}")
-else:
-    print("⚠ Aucun horizon temporel détecté.")
+    # Vérification rapide des villes reconnues
+    if "paris" in voice_command.lower():
+        return "Paris", 7
+    if "lyon" in voice_command.lower():
+        return "Lyon", 7
+    if "marseille" in voice_command.lower():
+        return "Marseille", 7
+    print("❌ Aucune ville détectée")
+    test_command = (voice_command)
+    city, horizon = extract_city_and_horizon(test_command)
+    print(f"🏙 Ville détectée : {city}, 📅 Horizon : {horizon}")
+    return city, 7

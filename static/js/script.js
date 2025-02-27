@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isRecording = false;
     let recognition;
     let recordingTimeout;
+    console.log("début enregistrement");
 
     if ('webkitSpeechRecognition' in window) {
         recognition = new webkitSpeechRecognition();
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         recognition.onresult = function(event) {
             const transcript = event.results[0][0].transcript.toLowerCase();
             recognizedTextDiv.textContent = "Ma demande est: " + transcript;
+            console.log(`transcript: ${transcript}`); // ✅ Vérification
             processVoiceCommand(transcript);
         };
 
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function processVoiceCommand(command) {
+        console.log("🔍 Commande vocale reçue :", command);
         let days = 7; // ✅ Par défaut, affichage sur 7 jours
         let city = "";
 
@@ -71,11 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
             city = words.slice(indexOfDe + 1).join(" ");
         }
 
-        if (!city) {
-            alert("Veuillez préciser une ville.");
-            return;
-        }
+        console.log("🏙 Ville détectée :", city);
 
+    
         sendVoiceCommand(city, days);
     }
 
@@ -169,3 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
         weatherInfoDiv.style.display = 'block';
     }
 });
+recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    console.log("🎤 Texte reconnu :", transcript); // ✅ Vérification
+    recognizedTextDiv.textContent = "Ma demande est: " + transcript;
+    processVoiceCommand(transcript);
+};

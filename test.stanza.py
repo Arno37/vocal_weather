@@ -63,3 +63,5 @@ def extract_city_and_horizon(text):
     print(f"📅 Horizon détecté : {horizon}")  # Debug
 
     return city, horizon
+
+

@@ -3,6 +3,7 @@ import requests
 import requests_cache
 from retry_requests import retry
 from geopy.geocoders import Nominatim
+import datetime  # Ajout pour utiliser datetime
 
 # Configuration du cache et de la gestion des erreurs
 cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
@@ -14,7 +15,7 @@ def get_coordinates(city_name):
     """Retourne les coordonnées GPS d'une ville."""
     geolocator = Nominatim(user_agent="geoapi")
     location = geolocator.geocode(city_name)
-    
+
     return (location.latitude, location.longitude) if location else None
 
 # Dictionnaire pour convertir les codes météo en texte lisible
@@ -45,10 +46,18 @@ def get_weather(city: str, days: int = 7):
     Récupère la météo pour une ville et un nombre de jours donné.
     """
 
-    # URL Open-Meteo avec latitude/longitude fixes pour tester (Paris)
+    # Récupérer les coordonnées de la ville demandée
+    coordinates = get_coordinates(city)
+    if not coordinates:
+        print(f"❌ Ville introuvable : {city}")
+        return {"error": "Ville introuvable"}
+
+    latitude, longitude = coordinates
+
+    # Construire l'URL Open-Meteo avec les vraies coordonnées
     url = (
         f"https://api.open-meteo.com/v1/forecast?"
-        f"latitude=48.8566&longitude=2.3522&daily=temperature_2m_max,weathercode&timezone=auto"
+        f"latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,weathercode&timezone=auto"
     )
     print(f"🌍 URL appelée : {url}")
 
@@ -75,7 +84,7 @@ def get_weather(city: str, days: int = 7):
 
                 # 🔍 Si l'utilisateur demande "aujourd'hui", on filtre uniquement la date du jour
                 if days == 1:
-                    today = datetime.today().strftime("%Y-%m-%d")
+                    today = datetime.datetime.today().strftime("%Y-%m-%d")
                     today_forecast = next((f for f in forecasts if f["date"] == today), None)
 
                     if today_forecast:

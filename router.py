@@ -2,6 +2,8 @@ from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from services.weather import get_weather 
+from services.nlp import extract_city_and_horizon
+
   # Import correct
 
 

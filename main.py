@@ -5,8 +5,6 @@ from router import router  # Assurez-vous que ce fichier est bien importé
 
 app = FastAPI()  # Création de l'application FastAPI
 
-# Instrumentation de l'API avec Prometheus (après la définition de `app`)
-Instrumentator().instrument(app).expose(app)
 
 # Ajout du montage des fichiers statiques
 app.mount("/static", StaticFiles(directory="static"), name="static")
