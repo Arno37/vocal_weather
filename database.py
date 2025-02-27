@@ -6,10 +6,11 @@ DATABASE = "postgres"  # Mets ici le bon nom de base
 USER = "arnaud"
 PASSWORD = "GRETAP4!2025***"
 
-def get_db_connection():
-    """Établit une connexion à PostgreSQL sur Azure."""
+def get_db_connection(show_log=True):
+    """Établit une connexion à PostgreSQL sur Azure et affiche un log si demandé."""
     try:
-        print("🔄 Tentative de connexion à PostgreSQL...")  # Ajout d'un log
+        if show_log:
+            print("🔄 Tentative de connexion à PostgreSQL...")  # Log affiché une seule fois
         conn = psycopg2.connect(
             host=HOST,
             database=DATABASE,
@@ -17,27 +18,16 @@ def get_db_connection():
             password=PASSWORD,
             port=5432
         )
-        print("✅ Connexion réussie à PostgreSQL Azure !")  # Log de succès
+        if show_log:
+            print("✅ Connexion réussie à PostgreSQL Azure !")
         return conn
     except Exception as e:
         print(f"❌ Erreur de connexion à PostgreSQL : {e}")
         return None
 
-# Lancer la connexion pour tester
-if __name__ == "__main__":
-    conn = get_db_connection()
-    if conn:
-        conn.close()
-        print("🔌 Connexion fermée proprement.")
-    else:
-        print("❌ Impossible d'établir une connexion.")
-
 def create_weather_table():
-    if __name__ == "__main__":
-    create_weather_table()
-
     """Crée la table Weather si elle n'existe pas."""
-    conn = get_db_connection()
+    conn = get_db_connection(show_log=False)  # ✅ Pas besoin d'afficher le log ici
     if not conn:
         print("❌ Impossible d'obtenir une connexion à la base de données.")
         return
@@ -61,4 +51,35 @@ def create_weather_table():
     finally:
         cursor.close()
         conn.close()
-        
+
+def check_weather_table():
+    """Affiche le contenu de la table Weather."""
+    conn = get_db_connection(show_log=False)  # ✅ Pas besoin d'afficher le log ici
+    if not conn:
+        print("❌ Impossible d'obtenir une connexion à la base de données.")
+        return
+
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("SELECT * FROM Weather;")
+        rows = cursor.fetchall()
+        if rows:
+            print("📊 Contenu de la table Weather :")
+            for row in rows:
+                print(row)
+        else:
+            print("🔍 La table Weather est vide.")
+    except Exception as e:
+        print(f"❌ Erreur lors de la lecture des données : {e}")
+    finally:
+        cursor.close()
+        conn.close()
+
+# 🔹 Exécuter le script uniquement si lancé directement
+if __name__ == "__main__":
+    conn = get_db_connection()  # ✅ Affiche la connexion réussie une seule fois
+    if conn:
+        conn.close()
+    create_weather_table()
+    check_weather_table()
