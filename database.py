@@ -1,24 +1,64 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, JSON
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from datetime import datetime
+import psycopg2
 
-# Remplace avec tes infos Azure
-DATABASE_URL = "mssql+pyodbc://arnaud:GRETAP4!2025***@SERVEUR.database.windows.net/NOM_BASE?driver=ODBC+Driver+17+for+SQL+Server"
+# Connexion à PostgreSQL sur Azure
+HOST = "vw-arnaud.postgres.database.azure.com"
+DATABASE = "postgres"  # Mets ici le bon nom de base
+USER = "arnaud"
+PASSWORD = "GRETAP4!2025***"
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+def get_db_connection():
+    """Établit une connexion à PostgreSQL sur Azure."""
+    try:
+        print("🔄 Tentative de connexion à PostgreSQL...")  # Ajout d'un log
+        conn = psycopg2.connect(
+            host=HOST,
+            database=DATABASE,
+            user=USER,
+            password=PASSWORD,
+            port=5432
+        )
+        print("✅ Connexion réussie à PostgreSQL Azure !")  # Log de succès
+        return conn
+    except Exception as e:
+        print(f"❌ Erreur de connexion à PostgreSQL : {e}")
+        return None
 
-# Définition du modèle de données
-class WeatherRequest(Base):
-    __tablename__ = "weather_requests"
+# Lancer la connexion pour tester
+if __name__ == "__main__":
+    conn = get_db_connection()
+    if conn:
+        conn.close()
+        print("🔌 Connexion fermée proprement.")
+    else:
+        print("❌ Impossible d'établir une connexion.")
 
-    id = Column(Integer, primary_key=True, index=True)
-    city = Column(String, index=True)
-    request_time = Column(DateTime, default=datetime.utcnow)
-    voice_command = Column(String)
-    weather_response = Column(JSON)
+def create_weather_table():
+    if __name__ == "__main__":
+    create_weather_table()
 
-# Création des tables
-Base.metadata.create_all(bind=engine)
+    """Crée la table Weather si elle n'existe pas."""
+    conn = get_db_connection()
+    if not conn:
+        print("❌ Impossible d'obtenir une connexion à la base de données.")
+        return
+
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Weather (
+                id SERIAL PRIMARY KEY,
+                city VARCHAR(100) NOT NULL,
+                date DATE NOT NULL,
+                temperature_max FLOAT NOT NULL,
+                condition TEXT NOT NULL
+            );
+        """)
+        conn.commit()
+        print("✅ Table Weather créée ou déjà existante.")
+    except Exception as e:
+        print(f"❌ Erreur lors de la création de la table : {e}")
+    finally:
+        cursor.close()
+        conn.close()
+        
