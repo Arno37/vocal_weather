@@ -17,6 +17,7 @@ templates = Jinja2Templates(directory="templates")
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "nom_app": "Météo App"})
 
+
 @router.post("/weather", response_class=JSONResponse)
 async def get_weather_route(request: Request, voice_command: str = Form(...)):
     print(f"Commande vocale reçue : {voice_command}")
@@ -30,5 +31,5 @@ async def get_weather_route(request: Request, voice_command: str = Form(...)):
 
         return {"weather": weather_data}
     except Exception as e:
-        print(f"Erreur interne : {str(e)}")
+        print(f"❌ Erreur interne : {str(e)}")
         return JSONResponse(content={"error": str(e)}, status_code=500)

@@ -77,37 +77,40 @@ def get_weather(city: str, days: int = 7):
         return {"city": city, "forecasts": []}
 
 # 🔹 Fonction pour stocker les données en base Azure SQL
+
 def save_weather_data(city, forecasts):
-    """Stocke les prévisions météo en base de données Azure."""
+    """Stocke les prévisions météo en base de données PostgreSQL."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # Vérifier si la table existe, sinon la créer
+        # ✅ Correction : PostgreSQL ne supporte pas "IF NOT EXISTS" dans une requête INSERT
+        # ✅ On crée la table une seule fois au début (évite de répéter cette requête)
         cursor.execute("""
-            IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Weather')
-            BEGIN
-                CREATE TABLE Weather (
-                    id INT IDENTITY(1,1) PRIMARY KEY,
-                    city NVARCHAR(100),
-                    date DATE,
-                    temperature_max FLOAT,
-                    condition NVARCHAR(255)
-                )
-            END
+            CREATE TABLE IF NOT EXISTS Weather (
+                id SERIAL PRIMARY KEY,
+                city VARCHAR(100) NOT NULL,
+                date DATE NOT NULL,
+                temperature_max FLOAT NOT NULL,
+                condition TEXT NOT NULL
+            );
         """)
 
-        # Insérer les prévisions météo en base
+        # ✅ Insertion des prévisions météo
         for forecast in forecasts:
             cursor.execute(
-                "INSERT INTO Weather (city, date, temperature_max, condition) VALUES (?, ?, ?, ?)",
-                city, forecast["date"], forecast["temperature_max"], forecast["condition"]
+                """
+                INSERT INTO Weather (city, date, temperature_max, condition)
+                VALUES (%s, %s, %s, %s)
+                """,
+                (city, forecast["date"], forecast["temperature_max"], forecast["condition"])
             )
 
         conn.commit()
-        cursor.close()
-        conn.close()
-        print(f"✅ Données météo stockées pour {city}")
+        print(f"✅ Données météo enregistrées pour {city}")
 
     except Exception as e:
         print(f"❌ Erreur lors de l'insertion en base : {str(e)}")
+    finally:
+        cursor.close()
+        conn.close()
