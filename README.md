@@ -16,10 +16,10 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### 📌 Services Utilisés
 - **Reconnaissance vocale :** Azure Speech-to-Text
 - **Analyse du langage :** Azure LUIS (Language Understanding)
-- **Données météo :** API externe avec Météo Concept
+- **Données météo :** API externe avec Open-Météo
 - **Stockage :** Azure SQL Database
 - **Hébergement backend :** Azure App Services / Azure Functions
-- **Frontend :** Streamlit ou React
+- **Frontend :** FastAPI
 
 ### 🔗 Flux de travail
 1. L'utilisateur **parle** (ex: "Quel temps fera-t-il à Lyon demain ?").
@@ -36,7 +36,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### 🖥 Prérequis
 - Python 3.x
 - Compte Azure
-- Clé API du site https://api.meteo-concept.com/
+- Clé API du site [https://api.meteo-concept.com/](https://open-meteo.com/)
 
 ### 📦 Installation
 1. **Cloner le projet**
