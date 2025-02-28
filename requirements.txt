@@ -26,7 +26,7 @@ django-cors-headers>=3.14.0
 whitenoise>=6.4.0
 gunicorn>=20.1.0
 
+# Additional Dependencies
 fastapi
 uvicorn
 requests
-pytest  # ✅ Ajoute cette ligne
