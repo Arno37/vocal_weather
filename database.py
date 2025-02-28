@@ -76,6 +76,21 @@ def check_weather_table():
         cursor.close()
         conn.close()
 
+        def get_weather(city: str, days: int = 7):
+            print(f"🔍 Récupération de la météo pour {city} sur {days} jours")
+    return {"city": city, "forecasts": [{"date": "2024-02-29", "temperature_max": 15, "condition": "Ensoleillé"}]}
+
+def get_weather(city: str, days: int = 7):
+    """Retourne une météo simulée."""
+    return {
+        "city": city,
+        "forecasts": [
+            {"date": "2024-02-29", "temperature_max": 12, "condition": "Nuageux"}
+        ]
+    }
+
+
+
 # 🔹 Exécuter le script uniquement si lancé directement
 if __name__ == "__main__":
     conn = get_db_connection()  # ✅ Affiche la connexion réussie une seule fois
