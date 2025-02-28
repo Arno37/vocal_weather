@@ -39,5 +39,12 @@
     </button>
 
     <script src="{{ url_for('static', path='js/script.js') }}"></script>
+    <div id="feedback-container" style="display: none;">
+        <h5>La météo est-elle correcte ?</h5>
+        <button id="feedback-yes" class="btn btn-success">✔ Oui</button>
+        <button id="feedback-no" class="btn btn-danger">❌ Non</button>
+        <p id="feedback-message" style="display: none; color: green;">Merci pour votre retour !</p>
+    </div>
+    
 </body>
 </html>

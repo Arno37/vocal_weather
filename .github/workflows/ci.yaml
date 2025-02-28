@@ -2,9 +2,9 @@ name: Python CI
 
 on:
   push:
-    branches: [main]  # 🚀 Lance GitHub Actions lors des pushs sur la branche `main`
+    branches: [main,dev]  # 🚀 Lance GitHub Actions lors des pushs sur la branche `main`
   pull_request:
-    branches: [main]  # 🚀 Lance également sur les pull requests vers `main`
+    branches: [main,dev]  # 🚀 Lance également sur les pull requests vers `main`
 
 jobs:
   test:
