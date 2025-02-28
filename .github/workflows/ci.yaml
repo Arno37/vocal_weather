@@ -25,5 +25,4 @@ jobs:
         pip install -r requirements.txt  # Installe les dépendances du projet
 
     - name: Run tests with pytest
-      run: |
-        pytest tests/  # Lance pytest sur ton dossier `tests`
+      run: pytest test_api.py
