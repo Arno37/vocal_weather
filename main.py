@@ -48,4 +48,3 @@ async def get_weather(city: str, days: int = Query(7, ge=1, le=7)):
         raise HTTPException(status_code=404, detail=response["error"])
 
     return response
-

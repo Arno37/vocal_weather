@@ -108,3 +108,13 @@ element {
     width: auto !important;
 }
 
+#feedback-container {
+    display: none;  /* Initialement caché */
+    margin-top: 20px;
+    text-align: center;
+}
+
+#feedback-container button {
+    margin: 10px;
+}
+

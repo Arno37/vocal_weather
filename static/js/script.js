@@ -90,14 +90,61 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `voice_command=${encodeURIComponent(city)}&days=${days}`
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la récupération des données météo');
+            }
+            return response.json();  // Convertit la réponse en JSON
+        })
         .then(data => {
-            console.log("Données reçues :", data);
-            displayWeatherInfo(data, days);
+            console.log("Données météo reçues :", data);  // Affiche toute la réponse
+    
+            if (data.weather && data.weather.forecasts && data.weather.forecasts.length > 0) {
+                console.log("Prévisions météo reçues :", data.weather.forecasts);  // Affiche les prévisions météo
+                displayWeatherInfo(data, days);  // Affiche les informations météo
+            } else {
+                console.error("Aucune prévision météo disponible");
+                alert('Aucune donnée météo trouvée ou structure de données incorrecte.');
+            }
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des données météo :', error);
             alert('Erreur lors de la récupération des données météo.');
         });
+        function displayWeatherInfo(data, days) {
+            const forecasts = data.weather.forecasts.slice(0, days);
+        
+            // Créer le tableau HTML
+            let forecastHtml = `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Condition</th>
+                            <th>Température Max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+        
+            forecasts.forEach(forecast => {
+                forecastHtml += `
+                    <tr>
+                        <td>${forecast.date}</td>
+                        <td>${forecast.condition || 'Non spécifiée'}</td>
+                        <td>${forecast.temperature_max || 'Non spécifiée'}°C</td>
+                    </tr>
+                `;
+            });
+        
+            forecastHtml += '</tbody></table>';  // Fermer le tableau
+        
+            // Insérer le tableau dans le DOM
+            weatherInfoDiv.innerHTML = forecastHtml;
+            weatherInfoDiv.style.display = 'block'; // Afficher la section météo
+        }
+        
     }
+    
+
 });
