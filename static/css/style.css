@@ -72,7 +72,7 @@ h1 {
 }
 
 #weather-info {
-    margin-top: 30px;
+    margin-top: 495px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -117,4 +117,6 @@ element {
 #feedback-container button {
     margin: 10px;
 }
+/* Supprimer ces lignes si tu ne veux plus du tout des classes p-3 et mb-5 */
+
 

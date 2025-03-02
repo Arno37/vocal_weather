@@ -15,36 +15,50 @@
 
     <h1>{{ nom_app }}</h1>
 
+    <!-- ✅ Section Météo mise à jour -->
     <div id="weather-info" class="card text-center shadow-custom p-3 mb-5 bg-white rounded" style="display: none;">
         <div class="card-body">
-            <h5 class="card-title">Météo pour <span id="city-name"></span></h5>
+            <h5 class="card-title">
+                Météo pour <span id="city-name">[Ville non détectée]</span>
+            </h5>
             <div class="card-text">
                 <p><strong>Condition :</strong> <span id="condition"></span></p>
                 <p><strong>Température :</strong> <span id="temperature"></span></p>
-                <p><strong>Prévisions :</strong> <span id="forecast"></span></p>
+                <p><strong>Prévisions :</strong></p>
+                <div id="forecast-table"></div> <!-- ✅ Zone dédiée pour le tableau météo -->
             </div>
         </div>
     </div>
+
+    <!-- ✅ Section Carte mise à jour -->
     <div id="map-container" class="card text-center shadow-custom p-3 mb-5 bg-white rounded" style="display: none;">
         <div class="card-body">
-            <h5 class="card-title">Localisation de <span id="map-city-name"></span></h5>
+            <h5 class="card-title">
+                Localisation de <span id="map-city-name">[Ville non détectée]</span>
+            </h5>
             <iframe id="map-frame" width="600" height="400" style="border: none;"></iframe>
         </div>
     </div>
 
+    <!-- ✅ Affichage du texte reconnu -->
     <div id="recognized-text"></div>
+    <p id="error-message" style="color: red; display: none;">❌ Aucune ville détectée. Veuillez réessayer.</p>
+
+    <!-- ✅ Bouton microphone (NE SERA PAS ÉCRASÉ) -->
     <button id="microphone-button" class="material-icon-button">
         <i class="bi bi-mic-fill" id="microphone-icon"></i>
-        <span id="button-text" style="display: none;"></span>
     </button>
 
+    <!-- ✅ Chargement du script après le contenu -->
     <script src="{{ url_for('static', path='js/script.js') }}"></script>
+
+    <!-- ✅ Section Feedback -->
     <div id="feedback-container" style="display: none;">
         <h5>La météo est-elle correcte ?</h5>
         <button id="feedback-yes" class="btn btn-success">✔ Oui</button>
         <button id="feedback-no" class="btn btn-danger">❌ Non</button>
         <p id="feedback-message" style="display: none; color: green;">Merci pour votre retour !</p>
     </div>
-    
+
 </body>
 </html>

@@ -30,7 +30,6 @@ WEATHER_CODES = {
 # Fonction principale pour récupérer la météo
 def get_weather(city: str, days: int = 7):
     """Récupère la météo pour une ville et un nombre de jours donné."""
-
     coordinates = get_coordinates(city)
     if not coordinates:
         print(f"❌ Ville introuvable : {city}")
@@ -59,24 +58,27 @@ def get_weather(city: str, days: int = 7):
                     )
                 ]
 
-                # Filtrer uniquement la météo d'aujourd'hui si nécessaire
                 if days == 1:
                     today = datetime.datetime.today().strftime("%Y-%m-%d")
                     today_forecast = next((f for f in forecasts if f["date"] == today), None)
-                    return {"city": city, "forecasts": [today_forecast]} if today_forecast else {"city": city, "forecasts": []}
+                    result = {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude},
+                              "forecasts": [today_forecast]} if today_forecast else {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude},
+                              "forecasts": []}
+                    return result
 
-                return {"city": city, "forecasts": forecasts[:days]}
+                result = {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude},
+                          "forecasts": forecasts[:days]}
+                return result
             else:
                 print("❌ Aucune donnée météo trouvée dans la réponse.")
-                return {"city": city, "forecasts": []}
+                return {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude}, "forecasts": []}
         else:
             print(f"❌ Erreur HTTP : {response.status_code}")
-            return {"city": city, "forecasts": []}
+            return {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude}, "forecasts": []}
     except Exception as e:
         print(f"❌ Erreur : {str(e)}")
-        return {"city": city, "forecasts": []}
+        return {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude}, "forecasts": []}
 
-# 🔹 Fonction pour stocker les données en base Azure SQL
 
 def save_weather_data(city, forecasts):
     """Stocke les prévisions météo en base de données PostgreSQL."""
