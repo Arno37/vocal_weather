@@ -59,7 +59,7 @@ def get_weather(city: str, days: int = 7):
                 ]
 
                 if days == 1:
-                    today = datetime.datetime.today().strftime("%Y-%m-%d")
+                    today = datetime.datetime.today().strftime("%d-%m-%dY")
                     today_forecast = next((f for f in forecasts if f["date"] == today), None)
                     result = {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude},
                               "forecasts": [today_forecast]} if today_forecast else {"city": city, "coordinates": {"latitude": latitude, "longitude": longitude},
