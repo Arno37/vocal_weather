@@ -36,7 +36,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### Prérequis
 - Python 3.x
 - Compte Azure
-- Clé API du site [https://api.meteo-concept.com/](https://open-meteo.com/)
+- [https://open-meteo.com/]
 
 ### Installation
 1. **Cloner le projet**
