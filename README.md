@@ -1,4 +1,4 @@
-# ☀️ Vocal Weather App
+# Vocal Weather App
 
 ## Description
 Ce projet consiste à développer une **application météo interactive avec commande vocale**. L'utilisateur peut demander la météo à voix haute, et l'application analyse la requête pour fournir les prévisions correspondantes.
@@ -63,7 +63,7 @@ Ce projet consiste à développer une **application météo interactive avec com
    ```
 5. **Lancer l'application**
    ```sh
-   python app.py
+   python main.py
    ```
 
 ---
@@ -77,16 +77,15 @@ Ce projet consiste à développer une **application météo interactive avec com
 - Analyse la phrase et extrait les entités (lieu, date).
 - Docs : [Azure LUIS](https://learn.microsoft.com/en-us/azure/cognitive-services/luis/)
 
-### API Météo (ex: OpenWeather)
+### API Météo 
 - Fournit les prévisions météo.
-- Docs : [Meteo Concept API](https://api.meteo-concept.com/)
+- Docs : [OPen Météo API](https://open-meteo.com/)
 
 ---
-## 🛠 Fonctionnalités et Améliorations Futures
+##  Fonctionnalités et Améliorations Futures
 ✅ Commande vocale pour demander la météo.  
 ✅ Analyse NLP pour comprendre la requête utilisateur.  
-✅ Connexion à une API météo externe.  
-✅ Interface web intuitive avec Flask.  
+✅ Connexion à une API météo externe.  .  
 ⬜ Prédiction de la météo avec IA.  
 ⬜ Géolocalisation automatique pour détecter l'emplacement de l'utilisateur.  
 ⬜ Intégration avec des assistants vocaux (Google Assistant, Alexa).  

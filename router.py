@@ -15,7 +15,7 @@ templates = Jinja2Templates(directory="templates")
 # Route de la page d'accueil
 @router.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse(request, "index.html", {"nom_app": "Vocal weather - Météo mondiale du jour et pour 7 jours"})
+    return templates.TemplateResponse(request, "index.html", {"nom_app": "Vocal weather - Météo du jour et à 7 jours"})
 
 
 @router.post("/weather", response_class=JSONResponse)
