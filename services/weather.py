@@ -4,7 +4,8 @@ import requests_cache
 from retry_requests import retry
 from geopy.geocoders import Nominatim
 import datetime  
-from database import get_db_connection
+from services.database import get_db_connection
+
 
 # Configuration du cache et de la gestion des erreurs
 cache_session = requests_cache.CachedSession('.cache', expire_after=3600)

@@ -71,14 +71,6 @@ h1 {
     display: none;
 }
 
-#weather-info {
-    margin-top: 275px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    text-align: center;
-    display: none;
-}
 
 #recognized-text {
     margin-top: 20px; /* Ajuste la valeur selon ton besoin */
@@ -120,3 +112,27 @@ element {
 /* Supprimer ces lignes si tu ne veux plus du tout des classes p-3 et mb-5 */
 
 
+#weather-info {
+    position: relative !important; /* ✅ Permet à `margin-top` de fonctionner */
+    margin-top: 180px !important;
+    border: 1px solid #ccc;
+}
+
+#reset-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #f44336; /* Rouge */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#reset-button:hover {
+    background-color: #d32f2f;
+}

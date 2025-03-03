@@ -3,7 +3,7 @@
 ## Description
 Ce projet consiste à développer une **application météo interactive avec commande vocale**. L'utilisateur peut demander la météo à voix haute, et l'application analyse la requête pour fournir les prévisions correspondantes.
 
-### 🎯 Objectifs
+### Objectifs
 - **Transformer la voix en texte** avec un service d'IA (Azure Speech-to-Text).
 - **Analyser le texte** pour extraire les informations clés (lieu, date).
 - **Interroger une API météo** externe pour obtenir les prévisions.
@@ -11,9 +11,9 @@ Ce projet consiste à développer une **application météo interactive avec com
 - **Exposer les prévisions via une interface web**.
 
 ---
-## 🏗 Architecture
+## Architecture
 
-### 📌 Services Utilisés
+### Services Utilisés
 - **Reconnaissance vocale :** Azure Speech-to-Text
 - **Analyse du langage :** Azure LUIS (Language Understanding)
 - **Données météo :** API externe avec Open-Météo
@@ -21,7 +21,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 - **Hébergement backend :** Azure App Services / Azure Functions
 - **Frontend :** FastAPI
 
-### 🔗 Flux de travail
+### Flux de travail
 1. L'utilisateur **parle** (ex: "Quel temps fera-t-il à Lyon demain ?").
 2. Azure Speech-to-Text **convertit la voix en texte**.
 3. Azure LUIS **analyse la phrase** et extrait le **lieu** et l'**horizon de prévision**.
@@ -31,14 +31,14 @@ Ce projet consiste à développer une **application météo interactive avec com
 5. L'application **affiche la météo** à l'utilisateur.
 
 ---
-## 🚀 Installation et Configuration
+## Installation et Configuration
 
-### 🖥 Prérequis
+### Prérequis
 - Python 3.x
 - Compte Azure
 - Clé API du site [https://api.meteo-concept.com/](https://open-meteo.com/)
 
-### 📦 Installation
+### Installation
 1. **Cloner le projet**
    ```sh
    git clone https://github.com/votre-repo/voice-weather-app.git
@@ -67,17 +67,17 @@ Ce projet consiste à développer une **application météo interactive avec com
    ```
 
 ---
-## 📡 API Utilisées
+## API Utilisées
 
-### 🎙 Azure Speech-to-Text
+### Azure Speech-to-Text
 - Convertit la voix en texte.
 - Docs : [Azure Speech Services](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/)
 
-### 🤖 Azure LUIS (Language Understanding)
+### Azure LUIS (Language Understanding)
 - Analyse la phrase et extrait les entités (lieu, date).
 - Docs : [Azure LUIS](https://learn.microsoft.com/en-us/azure/cognitive-services/luis/)
 
-### 🌦 API Météo (ex: OpenWeather)
+### API Météo (ex: OpenWeather)
 - Fournit les prévisions météo.
 - Docs : [Meteo Concept API](https://api.meteo-concept.com/)
 
@@ -92,13 +92,4 @@ Ce projet consiste à développer une **application météo interactive avec com
 ⬜ Intégration avec des assistants vocaux (Google Assistant, Alexa).  
 
 ---
-## 📜 Licence
-Ce projet est sous licence MIT.
-
----
-## 💬 Contact
-Pour toute question ou suggestion, contactez [votre email] ou ouvrez une issue sur GitHub.
-
----
-🚀 **Développé avec passion pour une expérience météo plus intuitive et accessible !**
 
