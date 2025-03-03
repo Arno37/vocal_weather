@@ -83,11 +83,11 @@ Ce projet consiste à développer une **application météo interactive avec com
 
 ---
 ## Fonctionnalités et Améliorations Futures
-✅ Commande vocale pour demander la météo.  
-✅ Analyse NLP pour comprendre la requête utilisateur.  
-✅ Connexion à une API météo externe.  
-✅ Interface web intuitive avec Flask.  
-⬜ Prédiction de la météo avec IA.  
+✅ Commande vocale pour demander la météo
+✅ Analyse NLP pour comprendre la requête utilisateur
+✅ Connexion à une API météo externe
+✅ Interface web intuitive avec Flask 
+⬜ Prédiction de la météo avec IA
 ⬜ Géolocalisation automatique pour détecter l'emplacement de l'utilisateur.  
 ⬜ Intégration avec des assistants vocaux (Google Assistant, Alexa).  
 
