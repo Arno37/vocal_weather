@@ -1,3 +1,5 @@
+![Vocal Weather App](assets/voice-weather.png)
+
 # Vocal Weather App
 
 ## Description
@@ -63,7 +65,7 @@ Ce projet consiste à développer une **application météo interactive avec com
    ```
 5. **Lancer l'application**
    ```sh
-   python app.py
+   python main.py
    ```
 
 ---
