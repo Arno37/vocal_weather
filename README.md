@@ -1,4 +1,4 @@
-![Vocal Weather App](images/voice-weather.png)
+![Vocal Weather App](static/images/voice-weather.png)
 
 # Vocal Weather App
 
