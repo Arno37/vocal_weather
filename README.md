@@ -1,4 +1,4 @@
-![Vocal Weather App](static/images/voice-weather.png)
+![Vocal Weather App](static/images/weather-forecast-voice-search-chalk-icon-smartphone-sound-command-idea-meteorology-app-mobile-application-audio-request-distant-phone-control-isolated-chalkboard-illustration-vector.png)
 
 # Vocal Weather App
 
