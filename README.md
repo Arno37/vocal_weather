@@ -79,7 +79,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 
 ### API Météo (ex: OpenWeather)
 - Fournit les prévisions météo.
-- Docs : [Meteo Concept API](https://api.meteo-concept.com/)
+- Docs : [Meteo Concept API](https://open-meteo.com/)
 
 ---
 ## Fonctionnalités et Améliorations Futures
