@@ -16,10 +16,10 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### Services Utilisés
 - **Reconnaissance vocale :** Azure Speech-to-Text
 - **Analyse du langage :** Azure LUIS (Language Understanding)
-- **Données météo :** API externe avec Météo Concept
+- **Données météo :** API externe avec Open-Météo
 - **Stockage :** Azure SQL Database
 - **Hébergement backend :** Azure App Services / Azure Functions
-- **Frontend :** Streamlit ou React
+- **Frontend :** FastAPI
 
 ### Flux de travail
 1. L'utilisateur **parle** (ex: "Quel temps fera-t-il à Lyon demain ?").
@@ -36,7 +36,11 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### Prérequis
 - Python 3.x
 - Compte Azure
+<<<<<<< HEAD
 - Clé API du site https://api.meteo-concept.com/
+=======
+- [https://open-meteo.com/]
+>>>>>>> dev
 
 ### Installation
 1. **Cloner le projet**
@@ -77,20 +81,35 @@ Ce projet consiste à développer une **application météo interactive avec com
 - Analyse la phrase et extrait les entités (lieu, date).
 - Docs : [Azure LUIS](https://learn.microsoft.com/en-us/azure/cognitive-services/luis/)
 
+<<<<<<< HEAD
 ### API Météo (ex: OpenWeather)
+=======
+### API Météo 
+>>>>>>> dev
 - Fournit les prévisions météo.
 - Docs : [OPen Météo API](https://open-meteo.com/)
 
 ---
+<<<<<<< HEAD
 ## Fonctionnalités et Améliorations Futures
 ✅ Commande vocale pour demander la météo
 ✅ Analyse NLP pour comprendre la requête utilisateur
 ✅ Connexion à une API météo externe
 ✅ Interface web intuitive avec Flask 
 ⬜ Prédiction de la météo avec IA
+=======
+##  Fonctionnalités et Améliorations Futures
+✅ Commande vocale pour demander la météo.  
+✅ Analyse NLP pour comprendre la requête utilisateur.  
+✅ Connexion à une API météo externe.  .  
+⬜ Prédiction de la météo avec IA.  
+>>>>>>> dev
 ⬜ Géolocalisation automatique pour détecter l'emplacement de l'utilisateur.  
 ⬜ Intégration avec des assistants vocaux (Google Assistant, Alexa).  
 
 ---
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev

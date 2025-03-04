@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ nom_app }}</title>
+    
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body class="d-flex flex-column align-items-center justify-content-center vh-100 bg-success-subtle">
+
+    <h1>{{ nom_app }}</h1>
+
+    <!-- Section Météo mise à jour -->
+    <div id="weather-info" class="card text-center shadow-custom p-3 mb-5 bg-white rounded" style="display: none;">
+        <div class="card-body">
+            <div class="card-text">
+                <div id="forecast-table"></div> <!-- Zone dédiée pour le tableau météo -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Carte mise à jour -->
+    <div id="map-container" class="card text-center shadow-custom p-3 mb-5 bg-white rounded" style="display: none;">
+        <div class="card-body">
+            <h5 class="card-title">
+                Localisation de <span id="map-city-name">[Ville non détectée]</span>
+            </h5>
+            <iframe id="map-frame" width="500" height="300" style="border: none;"></iframe>
+        </div>
+    </div>
+
+    <!-- Affichage du texte reconnu -->
+    <div id="recognized-text"></div>
+    <p id="error-message" style="color: red; display: none;">❌ Aucune ville détectée. Veuillez réessayer.</p>
+
+    <!-- Bouton microphone (NE SERA PAS ÉCRASÉ) -->
+    <button id="microphone-button" class="material-icon-button">
+        <i class="bi bi-mic-fill" id="microphone-icon"></i>
+    </button>
+
+    
+    <script src="{{ url_for('static', path='js/script.js') }}"></script>
+</body>
+</html>

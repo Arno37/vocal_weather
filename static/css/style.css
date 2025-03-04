@@ -1,0 +1,138 @@
+body {
+        background-image: url('../images/espace.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+
+
+
+h1 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    color: white;
+}
+
+
+/* Bouton du micro */
+.material-icon-button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    position: relative;
+    font-size: 16px;
+}
+
+.material-icon-button:hover {
+    background-color: #0056b3;
+}
+
+.material-icon-button:active {
+    background-color: #003366;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.material-icon-button .material-icons {
+    font-size: 48px;
+}
+
+/* CSS */
+.material-icon-button.recording {
+    background-color: #f44336; /* Rouge lors de l'enregistrement */
+}
+
+.material-icons {
+    font-size: 48px;
+}
+
+#button-text {
+    position: absolute;
+    font-size: 16px;
+}
+
+
+#recording-indicator {
+    color: red;
+    margin-top: 20px;
+    display: none;
+}
+
+
+#recognized-text {
+    margin-top: 20px; /* Ajuste la valeur selon ton besoin */
+    font-size: 18px;
+    text-align: center;
+    display: none;
+}
+
+#microphone-icon {
+    font-size: 48px; /* Taille de l'icône */
+    color: white;    /* Couleur */
+}
+
+.shadow-custom {
+    box-shadow: 0px 30px 50px rgba(255, 255, 255, 0.3); /* Ombre personnalisée */
+}
+
+.bg-custom {
+    background-color: #d4edda; /* Vert clair doux */
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+element {
+    width: auto !important;
+}
+
+#feedback-container {
+    display: none;  /* Initialement caché */
+    margin-top: 20px;
+    text-align: center;
+}
+
+#feedback-container button {
+    margin: 10px;
+}
+/* Supprimer ces lignes si tu ne veux plus du tout des classes p-3 et mb-5 */
+
+
+#weather-info {
+    position: relative !important; /* ✅ Permet à `margin-top` de fonctionner */
+    margin-top: 180px !important;
+    border: 1px solid #ccc;
+}
+
+#reset-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #f44336; /* Rouge */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+#reset-button:hover {
+    background-color: #d32f2f;
+}
