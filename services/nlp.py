@@ -20,9 +20,6 @@ def clean_text(text):
     print(f"📌 Texte après nettoyage : {text}")  # 🔥 Debug
     return text
 
-KNOWN_CITIES = {"paris", "lyon", "marseille", "toulouse", "bordeaux", "lille",
-                "nantes", "strasbourg", "rennes", "montpellier", "nice", "bruxelles",
-                "genève", "londres", "berlin", "new york", "tours"}
 
 def extract_city_and_horizon(text):
     """Extrait le nom de la ville et l'horizon temporel du texte"""
