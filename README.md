@@ -83,16 +83,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### API Météo 
 - Fournit les prévisions météo.
 - Docs : [OPen Météo API](https://open-meteo.com/)
-
----
-
-## Fonctionnalités et Améliorations Futures
-✅ Commande vocale pour demander la météo
-✅ Analyse NLP pour comprendre la requête utilisateur
-✅ Connexion à une API météo externe
-✅ Interface web intuitive avec Flask 
-⬜ Prédiction de la météo avec IA
-=======
+- 
 ##  Fonctionnalités et Améliorations Futures
 ✅ Commande vocale pour demander la météo.  
 ✅ Analyse NLP pour comprendre la requête utilisateur.  
@@ -103,7 +94,3 @@ Ce projet consiste à développer une **application météo interactive avec com
 
 ---
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
