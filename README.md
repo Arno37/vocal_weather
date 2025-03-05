@@ -66,8 +66,6 @@ Ce projet consiste à développer une **application météo interactive avec com
    ```sh
    python main.py
    ```
-
----
 ## API Utilisées
 
 ### Azure Speech-to-Text
@@ -83,7 +81,7 @@ Ce projet consiste à développer une **application météo interactive avec com
 ### API Météo 
 - Fournit les prévisions météo.
 - Docs : [OPen Météo API](https://open-meteo.com/)
-- 
+
 ##  Fonctionnalités et Améliorations Futures
 ✅ Commande vocale pour demander la météo.  
 ✅ Analyse NLP pour comprendre la requête utilisateur.  
