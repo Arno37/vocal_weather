@@ -76,8 +76,6 @@ Ce projet consiste à développer une **application météo interactive avec com
 - Analyse la phrase et extrait les entités (lieu, date).
 - Docs : [Azure LUIS](https://learn.microsoft.com/en-us/azure/cognitive-services/luis/)
 
-### API Météo (ex: OpenWeather)
-=======
 ### API Météo 
 - Fournit les prévisions météo.
 - Docs : [OPen Météo API](https://open-meteo.com/)
